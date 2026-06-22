@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   AreaChart,
   Area,
@@ -10,7 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useVaultData } from "../../hooks/useVaultData";
+import { useVaultData, Timeframe } from "../../hooks/useVaultData";
 
 interface VaultAPYChartProps {
   vaultId: string;
@@ -18,9 +18,16 @@ interface VaultAPYChartProps {
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
+    const date = new Date(label);
+    const formattedDate = date.toLocaleString(undefined, { 
+      month: 'short', 
+      day: 'numeric', 
+      hour: 'numeric', 
+      minute: '2-digit' 
+    });
     return (
       <div className="bg-background border border-border p-3 rounded-lg shadow-xl">
-        <p className="text-sm font-medium text-muted-foreground">{label}</p>
+        <p className="text-sm font-medium text-muted-foreground">{formattedDate}</p>
         <p className="text-lg font-bold text-foreground">
           ${payload[0].value.toFixed(4)}
         </p>
@@ -31,7 +38,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function VaultAPYChart({ vaultId }: VaultAPYChartProps) {
-  const { data, loading } = useVaultData(vaultId);
+  const [timeframe, setTimeframe] = useState<Timeframe>("1M");
+  const { data, loading } = useVaultData(vaultId, timeframe);
 
   if (loading) {
     return (
@@ -43,10 +51,25 @@ export function VaultAPYChart({ vaultId }: VaultAPYChartProps) {
 
   return (
     <div className="w-full h-[400px] p-4 bg-card rounded-xl border border-border shadow-sm">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 md:gap-0">
         <div>
           <h3 className="text-lg font-semibold text-foreground">Vault Performance</h3>
-          <p className="text-sm text-muted-foreground">Historical share price (30 days)</p>
+          <p className="text-sm text-muted-foreground">Historical share price</p>
+        </div>
+        <div className="flex bg-muted p-1 rounded-lg">
+          {(["1D", "1W", "1M", "1Y"] as Timeframe[]).map((tf) => (
+            <button
+              key={tf}
+              onClick={() => setTimeframe(tf)}
+              className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
+                timeframe === tf
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {tf}
+            </button>
+          ))}
         </div>
         <div className="text-right">
           <span className="text-2xl font-bold text-primary">
@@ -86,6 +109,11 @@ export function VaultAPYChart({ vaultId }: VaultAPYChartProps) {
             minTickGap={30}
             tickFormatter={(value) => {
               const date = new Date(value);
+              if (timeframe === "1D") {
+                return date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+              } else if (timeframe === "1Y") {
+                return date.toLocaleDateString(undefined, { month: 'short', year: '2-digit' });
+              }
               return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
             }}
           />
