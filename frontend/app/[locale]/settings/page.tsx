@@ -104,11 +104,15 @@ export default function SettingsPage() {
               </div>
               <div className="p-6 space-y-6">
                 {/* Theme Selector */}
-                <fieldset className="space-y-3">
-                  <legend className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                <div className="space-y-3">
+                  <span id="theme-selector-label" className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                     Appearance Theme
-                  </legend>
-                  <div className="grid grid-cols-3 gap-3">
+                  </span>
+                  <div
+                    className="grid grid-cols-3 gap-3"
+                    role="radiogroup"
+                    aria-labelledby="theme-selector-label"
+                  >
                     {[
                       { id: 'light', icon: Sun, label: 'Light' },
                       { id: 'dark', icon: Moon, label: 'Dark' },
@@ -117,7 +121,8 @@ export default function SettingsPage() {
                       <button
                         key={themeOption.id}
                         type="button"
-                        aria-pressed={theme === themeOption.id}
+                        role="radio"
+                        aria-checked={theme === themeOption.id}
                         onClick={() => setTheme(themeOption.id as 'light' | 'dark' | 'system')}
                         className={`flex flex-col items-center gap-2 p-3 rounded-xl border transition-all ${focusVisibleClass} ${theme === themeOption.id ? 'bg-primary/5 border-primary text-primary shadow-sm' : 'hover:bg-accent border-border text-muted-foreground'}`}
                       >
@@ -126,7 +131,7 @@ export default function SettingsPage() {
                       </button>
                     ))}
                   </div>
-                </fieldset>
+                </div>
 
                 {/* Currency Selector */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-2 gap-3 sm:gap-0">
@@ -135,7 +140,9 @@ export default function SettingsPage() {
                       <Coins className="w-4 h-4 text-muted-foreground" />
                       Secondary Currency
                     </label>
-                    <p className="text-xs text-muted-foreground">Choose currency for portfolio estimates.</p>
+                    <p id="secondary-currency-description" className="text-xs text-muted-foreground">
+                      Choose currency for portfolio estimates.
+                    </p>
                   </div>
                   <select
                     id="secondary-currency"
@@ -143,6 +150,8 @@ export default function SettingsPage() {
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
                     className={`bg-accent/50 border border-border rounded-lg text-sm px-3 py-1.5 outline-none w-full sm:w-auto ${focusVisibleClass}`}
+                    aria-label="Secondary currency for portfolio estimates"
+                    aria-describedby="secondary-currency-description"
                   >
                     <option value="USD">USD (Global)</option>
                     <option value="NGN">NGN (Nigeria)</option>
@@ -164,7 +173,7 @@ export default function SettingsPage() {
                   type="button"
                   role="switch"
                   aria-checked={notifications}
-                  aria-label="Toggle push notifications"
+                  aria-label="Enable push notifications"
                   onClick={() => setNotifications(!notifications)}
                   className={`w-12 h-6 rounded-full p-1 transition-colors duration-200 ease-in-out ${focusVisibleClass} ${notifications ? 'bg-primary' : 'bg-muted'}`}
                 >

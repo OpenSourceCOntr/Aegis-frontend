@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { AiInsightStream } from "../../components/AiInsightStream";
 import { VaultOverviewCard } from "../../components/VaultOverviewCard";
 import { VaultAPYChart } from "../../components/charts/VaultAPYChart";
@@ -52,8 +51,9 @@ export default function Home() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden" aria-hidden="true"
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
           onClick={closeMobileMenu}
+          aria-hidden="true"
         />
       )}
 
@@ -62,6 +62,7 @@ export default function Home() {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation menu"
+        aria-hidden={!mobileMenuOpen}
         className={`fixed top-0 right-0 h-full w-64 bg-card border-l border-border z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -77,7 +78,7 @@ export default function Home() {
             <X className="w-5 h-5" />
           </button>
         </div>
-        <nav className="flex flex-col p-4 gap-1">
+        <nav className="flex flex-col p-4 gap-1" aria-label="Mobile navigation">
           {[
             { key: "dashboard", label: t('dashboard') },
             { key: "referrals", label: t('referrals') },
@@ -139,7 +140,7 @@ export default function Home() {
             </div>
             <span className="text-lg sm:text-xl font-bold tracking-tight">X-Aegis</span>
           </div>
-          <nav className="hidden md:flex gap-8 text-sm font-medium text-muted-foreground">
+          <nav className="hidden md:flex gap-8 text-sm font-medium text-muted-foreground" aria-label="Main navigation">
             <button
               type="button"
               aria-pressed={activeTab === "dashboard"}
@@ -367,6 +368,4 @@ export default function Home() {
     </main>
   );
 }
-
-
 

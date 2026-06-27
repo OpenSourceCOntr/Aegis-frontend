@@ -16,7 +16,7 @@ describe("SettingsPage accessibility", () => {
     render(<SettingsPage />);
 
     const notificationSwitch = screen.getByRole("switch", {
-      name: /toggle push notifications/i,
+      name: /enable push notifications/i,
     });
 
     expect(notificationSwitch).toHaveAttribute("aria-checked", "true");
@@ -26,18 +26,18 @@ describe("SettingsPage accessibility", () => {
     expect(notificationSwitch).toHaveAttribute("aria-checked", "false");
   });
 
-  it("marks the selected appearance theme with aria-pressed", () => {
+  it("marks the selected appearance theme with aria-checked", () => {
     render(<SettingsPage />);
 
-    const systemThemeButton = screen.getByRole("button", { name: /system/i });
-    const lightThemeButton = screen.getByRole("button", { name: /light/i });
+    const systemThemeButton = screen.getByRole("radio", { name: /system/i });
+    const lightThemeButton = screen.getByRole("radio", { name: /light/i });
 
-    expect(systemThemeButton).toHaveAttribute("aria-pressed", "true");
+    expect(systemThemeButton).toHaveAttribute("aria-checked", "true");
 
     fireEvent.click(lightThemeButton);
 
-    expect(lightThemeButton).toHaveAttribute("aria-pressed", "true");
-    expect(systemThemeButton).toHaveAttribute("aria-pressed", "false");
+    expect(lightThemeButton).toHaveAttribute("aria-checked", "true");
+    expect(systemThemeButton).toHaveAttribute("aria-checked", "false");
   });
 
   it("renders settings actions as keyboard-reachable buttons and links", () => {
