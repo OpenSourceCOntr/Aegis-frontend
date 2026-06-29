@@ -24,5 +24,19 @@
     "waitingForWallet": "Verifique su billetera para aprobar la transacción",
     "viewOnExplorer": "Ver en Explorer",
     "close": "Cerrar"
+  },
+  "StaleData": {
+    "live": "En vivo",
+    "aging": "Antiguo",
+    "stale": "Obsoleto",
+    "justNow": "Ahora mismo",
+    "secondsAgo": "Hace {seconds}s",
+    "minuteAgo": "Hace 1 minuto",
+    "minutesAgo": "Hace {minutes} minutos",
+    "hourAgo": "Hace 1 hora",
+    "hoursAgo": "Hace {hours} horas",
+    "failedToLoad": "Error al cargar datos",
+    "retry": "Reintentar",
+    "loading": "Cargando datos"
   }
 }

@@ -24,5 +24,19 @@
     "waitingForWallet": "Please check your wallet to approve the transaction",
     "viewOnExplorer": "View on Explorer",
     "close": "Close"
+  },
+  "StaleData": {
+    "live": "Live",
+    "aging": "Aging",
+    "stale": "Stale",
+    "justNow": "Just now",
+    "secondsAgo": "{seconds}s ago",
+    "minuteAgo": "1 minute ago",
+    "minutesAgo": "{minutes} minutes ago",
+    "hourAgo": "1 hour ago",
+    "hoursAgo": "{hours} hours ago",
+    "failedToLoad": "Failed to load data",
+    "retry": "Retry",
+    "loading": "Loading data"
   }
 }
