@@ -74,6 +74,7 @@ function generateMockEvents(count: number): IndexerEventRaw[] {
   const kinds: Array<{ eventType: string }> = [
     { eventType: "deposit" },
     { eventType: "withdraw" },
+    { eventType: "rebalance" },
   ];
 
   const events: IndexerEventRaw[] = [];
