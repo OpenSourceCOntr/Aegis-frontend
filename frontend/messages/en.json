@@ -9,7 +9,8 @@
     "settings": "Settings",
     "deposit": "Deposit",
     "withdraw": "Withdraw",
-    "connectWallet": "Connect Wallet"
+    "connectWallet": "Connect Wallet",
+    "partners": "Partners"
   },
   "SigningOverlay": {
     "signingTitle": "Signing Transaction",
