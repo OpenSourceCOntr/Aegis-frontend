@@ -17,6 +17,7 @@ import { WithdrawTab } from "../../components/WithdrawTab";
 import { DepositTab } from "../../components/DepositTab";
 import { ReferralLinkCard } from "../../components/ReferralLinkCard";
 import { ReferralStatsCard } from "../../components/ReferralStatsCard";
+import { PartnerDashboard } from "../../components/PartnerDashboard";
 import { Gift, HelpCircle } from "lucide-react";
 import { CurrencySwitch } from "../../components/CurrencySwitch";
 import { NetworkSwitch } from "../../components/NetworkSwitch";
@@ -83,6 +84,7 @@ export default function Home() {
           {[
             { key: "dashboard", label: t('dashboard') },
             { key: "referrals", label: t('referrals') },
+            { key: "partners", label: t('partners') },
             { key: "vaults", label: t('vaults'), href: "#" },
             { key: "swap", label: t('swap'), href: "#" },
             { key: "settings", label: t('settings'), href: "/settings" },
@@ -160,6 +162,14 @@ export default function Home() {
               className={`${activeTab === "referrals" ? "text-foreground" : "hover:text-foreground"} transition-colors rounded-sm ${focusVisibleClass}`}
              >
               {t('referrals')}
+            </button>
+            <button
+              type="button"
+              aria-pressed={activeTab === "partners"}
+              onClick={() => setActiveTab("partners")}
+              className={`${activeTab === "partners" ? "text-foreground" : "hover:text-foreground"} transition-colors rounded-sm ${focusVisibleClass}`}
+            >
+              {t('partners')}
             </button>
             <button type="button" className={`hover:text-foreground transition-colors rounded-sm ${focusVisibleClass}`}>{t('vaults')}</button>
             <button type="button" className={`hover:text-foreground transition-colors rounded-sm ${focusVisibleClass}`}>{t('swap')}</button>
@@ -366,6 +376,8 @@ export default function Home() {
                </div>
             </div>
           </div>
+        ) : activeTab === "partners" ? (
+          <PartnerDashboard />
         ) : activeTab === "withdraw" ? (
           <WithdrawTab />
         ) : (
