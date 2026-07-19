@@ -9,7 +9,8 @@
     "settings": "Ajustes",
     "deposit": "Depositar",
     "withdraw": "Retirar",
-    "connectWallet": "Conectar Billetera"
+    "connectWallet": "Conectar Billetera",
+    "partners": "Socios"
   },
   "SigningOverlay": {
     "signingTitle": "Firmando Transacción",
