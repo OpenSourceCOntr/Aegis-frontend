@@ -69,7 +69,7 @@ export function useTransactionHistory({
   return { items, loading, error, refresh };
 }
 
-function generateMockEvents(count: number): IndexerEventRaw[] {
+export function generateMockEvents(count: number): IndexerEventRaw[] {
   const assets = ["USDC", "XLM", "EURC"];
   const kinds: Array<{ eventType: string }> = [
     { eventType: "deposit" },
